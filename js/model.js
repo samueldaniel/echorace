@@ -23,8 +23,13 @@ var Artist = (function () {
 		return all;
 	}
 
+	var cut = function (xs) {
+		return _.first(xs, 5);
+	}
+
 	// Adds the links to the center/child graph
 	var makeGraph = function(center, children) {
+		children = cut(children);
 		var links = _.map(children, function(i, child) {
 			return {
 				source: 0,
@@ -59,7 +64,9 @@ var Artist = (function () {
 			id: artist.id,
 			format: 'json'
 		}
+		console.log("Launching ajax...");
 		$.get(url, data).done(function (resp) {
+			console.log("Ajax done!");
 			options.success(resp.response.artists);
 		});
 	}
