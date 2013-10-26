@@ -22,9 +22,15 @@
       width: 100%;
       height:100%;
       }
-      #timer {
-        padding: 10 10 10 10;
+      .timer {
+        padding-right: 10px;
+        padding-top: 3px;
       }
+      #click-cont {
+        padding-left: 15px;
+        padding-right: 3px;
+      }
+
 
     </style>
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
@@ -50,16 +56,29 @@
         <p class="navbar-text">
         The most awesome game ever built.
         </p>
-        <ul class="nav navbar-nav navbar-right">
-          <li id="timer">
+        <ul class="nav navbar-nav navbar-right timer">
+          <li style="padding-right: 10px; padding-top: 3px;">
+            <button id="start" type="button" class="btn btn-success">Start</button>
+          </li>
+          <li class="">
             <div id="counter-hrs"><input type="hidden" name="counter-hrs-value" value="0" /></div>
+          </li>
+          <li class="">
             <div id="counter-mins"><input type="hidden" name="counter-mins-value" value="0" /></div>
+
+          </li>
+          <li class="">
             <div id="counter-secs"><input type="hidden" name="counter-secs-value" value="0" /></div>
-            
+          </li>
+          <li id="click-cont">
+            <h4 id="clicks">Clicks: 0</h4>
           </li>
         </ul>
       </div>
     </nav>
+    <div class="row" style="text-align: center;">
+      <h1 id="goal"></h1>
+    </div>
     <div class='max'>
     <!-- <svg></svg> -->
     </div>
@@ -71,5 +90,6 @@
   <script type="text/javascript" src="js/echonest.js"></script>
   <script type="text/javascript" src="js/model.js"></script>
   <script type="text/javascript" src="js/er.js"></script>
+  <script type="text/javascript" src="time.js"></script>
 </body>
 </html>
