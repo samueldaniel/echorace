@@ -73,8 +73,12 @@ function clearGraph() {
   d3.select("svg").remove();
 }
 
+var clickcount = 0;
+
 var click = function (d) {
   console.log("Click!");
+  clickcount++;
+  $("#clicks").html("Clicks: " + clickcount);
   console.log(d);
   if (d.id !== graph.center.id) {
     Artist.getNext(d, {
@@ -88,10 +92,15 @@ var click = function (d) {
       }
     });
   }
+  return true;
 }
 
 var enlargeCenter = function() {
   svg.select('.node').attr("r", 90)
+}
+
+var setGoal = function(goal) {
+  $("#goal").html("Race to " + goal);
 }
 
 // Start up!
@@ -102,6 +111,7 @@ Artist.getInitial(race.from, {
     console.log(_graph);
     graph = _graph;
     drawGraph();
+    setGoal(race.to.name);
   }
 })
 
