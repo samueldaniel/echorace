@@ -1,97 +1,74 @@
 <html>
 <meta charset="utf-8">
-<style>
+<head>
+    <style>
 
-.node {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
+      .node {
+      stroke: #fff;
+      stroke-width: 1.5px;
+      }
 
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
-}
+      .link {
+      stroke: #999;
+      stroke-opacity: .6;
+      }
 
-.node text {
-  pointer-events: none;
-  font: 10px sans-serif;
-}
+      .node text {
+      pointer-events: none;
+      font: 10px sans-serif;
+      }
 
-.max, svg {
-  width: 100%;
-  height:100%;
-}
+      .max, svg {
+      width: 100%;
+      height:100%;
+      }
+      #timer {
+        padding: 10 10 10 10;
+      }
 
-</style>
-<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
-<script type="text/javascript" src="js/lib/query.easing.1.3.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/lib/jquery.flipCounter.1.2.pack.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/lib/jquery-1.10.2.min.js" type='text/javascript'></script>
+    </style>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery.flipCounter.1.2.pack.js" type="text/javascript"></script>
+</head>
 <body>
   <div class="container">
     <nav class="navbar navbar-default" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
         </button>
         <a href="#" class="navbar-brand">EchoRace</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse">
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
         <p class="navbar-text">
-          The most awesome game ever built.
+        The most awesome game ever built.
         </p>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#about">About</a></li>
-          <li><a href="#login">Login</a></li>
-          <li><a href="https://github.com/giladgray/generator-backstrap" target="_blank">GitHub</a></li>
+          <li id="timer">
+            <div id="counter-hrs"><input type="hidden" name="counter-hrs-value" value="0" /></div>
+            <div id="counter-mins"><input type="hidden" name="counter-mins-value" value="0" /></div>
+            <div id="counter-secs"><input type="hidden" name="counter-secs-value" value="0" /></div>
+            
+          </li>
         </ul>
       </div>
     </nav>
-    <div class="row">
-      <div class=".col-md-6">
-        <h1>EchoRace</h1>
-      </div>
-      <div class=".col-md-6">
-        <div id="counter"><input type="hidden" name="counter-value" value="100" /></div>
-        <script type="text/javascript">
-        /* <![CDATA[ */
-        $(document).ready(function($) {
-          $("#counter").flipCounter();            
-        });
-        /* ]]> */
-        $("#counter").flipCounter({
-          number:0, // the initial number the counter should display, overrides the hidden field
-          numIntegralDigits:1, // number of places left of the decimal point to maintain
-          numFractionalDigits:0, // number of places right of the decimal point to maintain
-          digitClass:"counter-digit", // class of the counter digits
-          counterFieldName:"counter-value", // name of the hidden field
-          digitHeight:40, // the height of each digit in the flipCounter-medium.png sprite image
-          digitWidth:30, // the width of each digit in the flipCounter-medium.png sprite image
-          imagePath:"img/flipCounter-medium.png", // the path to the sprite image relative to your html document
-          easing: false, // the easing function to apply to animations, you can override this with a jQuery.easing method
-          duration:10000, // duration of animations
-          onAnimationStarted:false, // call back for animation upon starting
-          onAnimationStopped:false, // call back for animation upon stopping
-          onAnimationPaused:false, // call back for animation upon pausing
-          onAnimationResumed:false // call back for animation upon resuming from pause
-        });
-</script>
-</div>
-</div>
-<div class='max'>
-  <!-- <svg></svg> -->
-</div>
-</div>
+    <div class='max'>
+    <!-- <svg></svg> -->
+    </div>
+  </div>
 
-<script type="text/javascript" src="js/lib/d3.v3.min.js"></script>
-<script type="text/javascript" src="js/lib/underscore-min.js"></script>
-<script type="text/javascript" src="js/artists.js"></script>
-<script type="text/javascript" src="js/model.js"></script>
-<script type="text/javascript" src="js/er.js"></script>
+  <script type="text/javascript" src="js/lib/d3.v3.min.js"></script>
+  <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+  <script type="text/javascript" src="js/artists.js"></script>
+  <script type="text/javascript" src="js/model.js"></script>
+  <script type="text/javascript" src="js/er.js"></script>
 </body>
 </html>
