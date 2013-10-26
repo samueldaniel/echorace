@@ -27,7 +27,7 @@ var timerInit = function() {
 
   $("#counter-secs").flipCounter({
           number:0, // the initial number the counter should display, overrides the hidden field
-          format:".##",locale:"us",
+          format:".00",locale:"us",
           numIntegralDigits:2, // number of places left of the decimal point to maintain
             numFractionalDigits:0, // number of places right of the decimal point to maintain
             digitClass:"counter-digit", // class of the counter digits
@@ -45,7 +45,7 @@ var timerInit = function() {
 
     $("#counter-mins").flipCounter({
           number:0, // the initial number the counter should display, overrides the hidden field
-            format:".##",locale:"us",
+            format:".00",locale:"us",
             numIntegralDigits:2, // number of places left of the decimal point to maintain
             numFractionalDigits:0, // number of places right of the decimal point to maintain
             digitClass:"counter-digit", // class of the counter digits
