@@ -93,16 +93,26 @@ var click = function (d) {
   clickcount++;
   $("#clicks").html("Clicks: " + clickcount);
   console.log(d);
-  if (d.id !== graph.center.id) {
-    Artist.getNext(d).done(function () {
+  if (d.cid !== graph.center.cid) {
+    if (d.id === graph.center.id) {
+      // You win!
+      victory();
+    } else {
+      // Switch child to center and proceed
+      Artist.getNext(d).done(function () {
         graph = this;
         clearGraph();
         drawGraph();
       }).fail(function () {
         console.log("Failure to get next");
       })
+    }
   }
   return true;
+}
+
+var victory = function () {
+
 }
 
 var setGoal = function(goal) {
@@ -112,10 +122,10 @@ var setGoal = function(goal) {
 // Start up!
 console.log("Querying for initial");
 Artist.getInitial(race.from, {
-  success: function () {
+  success: function (g) {
     console.log("Got initial graph, starting up");
-    console.log(this);
-    graph = this;
+    console.log(g);
+    graph = g;
     drawGraph();
     setGoal(race.to.name);
   }

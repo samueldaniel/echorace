@@ -18,8 +18,6 @@ var EchoNest = (function() {
 	}
 
 	var _getSimilar = function(artist, prefetch) {
-		// console.log("CACHE MISS!!");
-
 		url = "http://developer.echonest.com/api/v4/artist/similar"
 		data = {
 			api_key: "MHSE3YIQAWLBHWFSO",
@@ -32,7 +30,7 @@ var EchoNest = (function() {
 		$.get(url, data).done(function (resp) {
 			// console.log("Ajax done!");
 			var artists = _.first(resp.response.artists, limit);
-			deferred.resolveWith(artists);
+			deferred.resolveWith(generateCID(artists));
 
 			// prefetch the next round if desired
 			if (prefetch === true) {
@@ -45,6 +43,17 @@ var EchoNest = (function() {
 
 	var hashFunction = function(artist) {
 		return artist.id;
+	}
+
+	var generateCID = function (arg) {
+		if (_.isArray(arg)) {
+			_.each(arg, function(artist) {
+				artists.cid = _.uniqueId();
+			})
+		} else {
+			arg.cid = _.uniqueId();
+		}
+		return arg;
 	}
 
 	var getSimilar = _.memoize(_getSimilar, hashFunction);

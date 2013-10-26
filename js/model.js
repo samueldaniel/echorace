@@ -54,7 +54,11 @@ var Artist = (function () {
 	// Given the initial center, returns a graph
 	var getInitial = function (to, options) {
 		console.log(to);
-		getNext(to).then(options.success, options.error);
+		getNext(to).then(function () {
+			console.log("Got next");
+			console.log(this);
+			options.success(this);
+		}, options.error);
 	}
 
 	// Options has success/failure continuations
@@ -64,7 +68,8 @@ var Artist = (function () {
 		EchoNest.getSimilar(center)
 			.done(function () {
 				related = this;
-				def.resolveWith(makeGraph(assignGroups(center), assignGroups(related)));
+				g = makeGraph(assignGroups(center), assignGroups(related));
+				def.resolveWith(g, g);
 			})
 			.fail(function () {
 				console.log("Error in getting similar artists!");
