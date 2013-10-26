@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "EchoRace": {
+            "applicationId": "KF0LpUhki4t7e3asgEDIs80iAkqIFLO7zlMEd0Zd", 
+            "masterKey": "XectYmgTvA6KnLHJd9BfT0ugQqlsfAdcLlhAxP6t"
+        }, 
+        "_default": {
+            "link": "EchoRace"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.12"
+    }
+}

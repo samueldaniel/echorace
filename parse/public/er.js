@@ -74,14 +74,19 @@ function clearGraph() {
 }
 
 var click = function (d) {
+  console.log("Click!");
+  console.log(d);
   if (d.id !== graph.center.id) {
-    Artist.getNext(d).done(function () {
-        graph = this;
+    Artist.getNext(d, {
+      success: function (_graph) {
+        graph = _graph;
         clearGraph();
         drawGraph();
-      }).fail(function () {
+      },
+      failure: function (err) {
         console.log("Failure to get next");
-      })
+      }
+    });
   }
 }
 
@@ -92,10 +97,10 @@ var enlargeCenter = function() {
 // Start up!
 console.log("Querying for initial");
 Artist.getInitial(race.from, {
-  success: function () {
+  success: function (_graph) {
     console.log("Got initial graph, starting up");
-    console.log(this);
-    graph = this;
+    console.log(_graph);
+    graph = _graph;
     drawGraph();
   }
 })
