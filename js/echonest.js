@@ -1,7 +1,8 @@
 var EchoNest = (function() {
 
 	var delay = 50,
-		limit = 7;
+		limit = 7,
+		api_key = "MHSE3YIQAWLBHWFSO";
 
 	var randomElementNotPresentIn = function (list, blacklist) 
 	{
@@ -42,7 +43,7 @@ var EchoNest = (function() {
 	var _getSimilar = function(artist, prefetch) {
 		url = "http://developer.echonest.com/api/v4/artist/similar"
 		data = {
-			api_key: "MHSE3YIQAWLBHWFSO",
+			api_key: api_key,
 			id: artist.id,
 			format: 'json'
 		}
@@ -59,8 +60,52 @@ var EchoNest = (function() {
 			// return a promise
 			var def = new $.Deferred();
 			def.resolveWith(artists);
-			return def.promise();
+			return def;
 		});	
+	}
+
+	var _addTerms = function (artist) {
+		url = "http://developer.echonest.com/api/v4/artist/terms"
+		data = {
+			api_key: api_key,
+			id: artist.id,
+			format: 'json',
+			sort: 'weight'
+		}
+
+		console.log("Making http req for terms");
+
+		return $.get(url, data).then(function (resp) {
+			artist.terms = _.pluck(_.first(resp.response.terms, 3), 'name');
+			console.log("Resolved terms with:");
+			console.log(artist.terms);
+
+			return new $.Deferred().resolveWith(artist, artist);
+		});
+	}
+
+	var addTerms = function(def) {
+		return def;
+		console.log("Add terms got:")
+		console.log(def.state());
+		var master = def.then(function () {
+			console.log("artists given =");
+			console.log(this);
+			var defs  = _.map(this, function(a) {
+				return _addTerms(a);
+			});
+
+			return $.when.apply(null, defs);
+		});
+
+		console.log("Master deferred");
+		console.log(master);
+
+		return master.done(function (arg) {
+			console.log("addTerms master deferred has resolved with");
+			console.log(this);
+			console.log(arg);
+		});
 	}
 
 	var hashFunction = function(artist) {
@@ -82,7 +127,14 @@ var EchoNest = (function() {
 
 	return {
 		getSimilar: function(artist) {
-			return getSimilar(artist, true);
+			console.log("Call to get similar on ");
+			console.log(artist);
+			return addTerms(getSimilar(artist, true));
+		},
+
+		addTerms: function (deferred) {
+			return addTerms(deferred);
+			// return addTerms(new $.Deferred.promise(artist));
 		}
 	}
 

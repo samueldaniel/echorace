@@ -51,8 +51,20 @@ function drawGraph () {
 
   // add text
   gnodes.append("text")
-    .text(function(d) { return d.name; })
+    .text(function(d) { 
+      console.log(d);
+      return d.name; })
+    // .text(function(d) { 
+    //   console.log(d);
+    //   return d.terms.join(", "); 
+    // })
     .style('text-anchor', 'middle');
+
+  // gnodes.append("text")
+  //   .text(function (d) { 
+  //     console.log(d);
+  //     return d.terms.join(", ")})
+  //   .style('text-anchor', 'middle');
 
   // update positions
   force.on("tick", function() {
@@ -84,10 +96,10 @@ var click = function (d) {
   if (clickcount == 0) {
     $("#counter-secs").flipCounter("startAnimation",
       {
-              number: 0, // the number we want to scroll from
-                end_number: 60, // the number we want the counter to scroll to
-                easing: false, // this easing function to apply to the scroll.
-                duration: 60000 // number of ms animation should take to complete
+          number: 0, // the number we want to scroll from
+          end_number: 60, // the number we want the counter to scroll to
+          easing: false, // this easing function to apply to the scroll.
+          duration: 60000 // number of ms animation should take to complete
       });
   }
   clickcount++;
@@ -110,11 +122,10 @@ var click = function (d) {
       })
     }
   }
-  return true;
 }
 
 var victory = function () {
-
+  console.log("Way to go");
 }
 
 var setGoal = function(goal) {

@@ -2,6 +2,8 @@
 
 var Artist = (function () {
 
+	var previousColor = null;
+
 	var randomElement = function (list)
 	{
 		return list[_.random(list.length)];
@@ -33,6 +35,9 @@ var Artist = (function () {
 			}
 		});
 
+		console.log("Got childen = " + children);
+		console.log("center: " + center)
+
 		return {
 			center: center,
 			links: links,
@@ -54,7 +59,7 @@ var Artist = (function () {
 	// Given the initial center, returns a graph
 	var getInitial = function (to, options) {
 		console.log(to);
-		getNext(to).then(function () {
+		EchoNest.addTerms(getNext(to)).then(function () {
 			console.log("Got next");
 			console.log(this);
 			options.success(this);
@@ -81,10 +86,16 @@ var Artist = (function () {
 	var assignGroups = function (nodes) {
 		if (_.isArray(nodes)) {
 			_.each(nodes, function(n, i) {
-				n.group = i+1;
+				r = _.random(0, 19);
+				if (r === previousColor) {
+					n.group = _.random(0, 19);
+				} else {
+					n.group = r;
+				}
 			});
 		} else {
-			nodes.group = 0;
+			nodes.group = nodes.group || 0;
+			previousColor = nodes.group;
 		}
 		return nodes;
 	}
