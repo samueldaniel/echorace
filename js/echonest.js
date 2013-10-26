@@ -3,6 +3,31 @@ var EchoNest = (function() {
 	var delay = 50,
 		limit = 7;
 
+	var randomElementNotPresentIn = function (list, blacklist) 
+	{
+		var randomElement = function (list){ 
+			return list[_.random(list.length - 1)];
+		}
+		while (1) {
+			var e = randomElement(list);
+			if (!_.contains(blacklist, e)) {
+				return e;
+			}
+		}
+	}
+
+	var randomSubset = function (list, n) 
+	{
+		var output = [];
+		_.times(n, function(i) {
+			output.push(randomElementNotPresentIn(list, output));
+		});
+
+		console.log("Random subset generated:");
+		console.log(output);
+		return output;
+	}
+
 	var batchPreFetch = function(artists) {
 		console.log("Performing batch prefetch");
 		_.each(artists, function(a, i) { 
@@ -25,20 +50,21 @@ var EchoNest = (function() {
 			format: 'json'
 		}
 
-		var deferred = new $.Deferred();
+		var deferred = $.get(url, data).then(function (resp) {
+			var def = new $.Deferred();
 
-		$.get(url, data).done(function (resp) {
-			// console.log("Ajax done!");
-			var artists = _.first(resp.response.artists, limit);
-			deferred.resolveWith(generateCID(artists));
+			var artists = randomSubset(resp.response.artists, limit);
+			def.resolveWith(generateCID(artists));
 
 			// prefetch the next round if desired
 			if (prefetch === true) {
 				batchPreFetch(artists);
 			}
-		});
 
-		return deferred.promise();
+			return def.promise();
+		});	
+
+		return deferred;
 	}
 
 	var hashFunction = function(artist) {
@@ -48,7 +74,7 @@ var EchoNest = (function() {
 	var generateCID = function (arg) {
 		if (_.isArray(arg)) {
 			_.each(arg, function(artist) {
-				artists.cid = _.uniqueId();
+				artist.cid = _.uniqueId();
 			})
 		} else {
 			arg.cid = _.uniqueId();
