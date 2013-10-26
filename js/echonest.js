@@ -1,7 +1,7 @@
 var EchoNest = (function() {
 
 	var delay = 50,
-		limit = 5;
+		limit = 7;
 
 	var batchPreFetch = function(artists) {
 		console.log("Performing batch prefetch");
@@ -19,8 +19,6 @@ var EchoNest = (function() {
 
 	var _getSimilar = function(artist, prefetch) {
 		// console.log("CACHE MISS!!");
-
-		console.log("retrieving artist with id = " + artist.id);
 
 		url = "http://developer.echonest.com/api/v4/artist/similar"
 		data = {
