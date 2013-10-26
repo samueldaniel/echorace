@@ -27,7 +27,7 @@ var timerInit = function() {
 
   $("#counter-secs").flipCounter({
           number:0, // the initial number the counter should display, overrides the hidden field
-          format:".00",locale:"us",
+          format:".##",locale:"us",
           numIntegralDigits:2, // number of places left of the decimal point to maintain
             numFractionalDigits:0, // number of places right of the decimal point to maintain
             digitClass:"counter-digit", // class of the counter digits
@@ -45,7 +45,7 @@ var timerInit = function() {
 
     $("#counter-mins").flipCounter({
           number:0, // the initial number the counter should display, overrides the hidden field
-            format:".00",locale:"us",
+            format:".##",locale:"us",
             numIntegralDigits:2, // number of places left of the decimal point to maintain
             numFractionalDigits:0, // number of places right of the decimal point to maintain
             digitClass:"counter-digit", // class of the counter digits
@@ -77,20 +77,6 @@ var timerInit = function() {
             onAnimationPaused:false, // call back for animation upon pausing
             onAnimationResumed:false // call back for animation upon resuming from pause
           });
-
-    $("#start").click(function(){
-        if (start == 0) {
-          start++;
-          $("#counter-secs").flipCounter("startAnimation",
-            {
-                    number: 0, // the number we want to scroll from
-                      end_number: 60, // the number we want the counter to scroll to
-                      easing: false, // this easing function to apply to the scroll.
-                      duration: 60000 // number of ms animation should take to complete
-            });
-          $(this).html("Stop?");
-        }
-    });
 }
 
 

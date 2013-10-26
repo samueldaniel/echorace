@@ -77,6 +77,15 @@ var clickcount = 0;
 
 var click = function (d) {
   console.log("Click!");
+  if (clickcount == 0) {
+    $("#counter-secs").flipCounter("startAnimation",
+      {
+              number: 0, // the number we want to scroll from
+                end_number: 60, // the number we want the counter to scroll to
+                easing: false, // this easing function to apply to the scroll.
+                duration: 60000 // number of ms animation should take to complete
+      });
+  }
   clickcount++;
   $("#clicks").html("Clicks: " + clickcount);
   console.log(d);
