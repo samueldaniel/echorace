@@ -96,8 +96,10 @@ var click = function (d) {
   if (d.cid !== graph.center.cid) {
     if (d.id === graph.center.id) {
       // You win!
+      console.log("You won");
       victory();
     } else {
+      console.log("Getting next");
       // Switch child to center and proceed
       Artist.getNext(d).done(function () {
         graph = this;
