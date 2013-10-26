@@ -22,9 +22,6 @@ var EchoNest = (function() {
 		_.times(n, function(i) {
 			output.push(randomElementNotPresentIn(list, output));
 		});
-
-		console.log("Random subset generated:");
-		console.log(output);
 		return output;
 	}
 
@@ -50,21 +47,20 @@ var EchoNest = (function() {
 			format: 'json'
 		}
 
-		var deferred = $.get(url, data).then(function (resp) {
-			var def = new $.Deferred();
-
-			var artists = randomSubset(resp.response.artists, limit);
-			def.resolveWith(generateCID(artists));
-
-			// prefetch the next round if desired
+		return $.get(url, data).then(function (resp) {
+			// format the returned data appropriately
+			var artists = generateCID(randomSubset(resp.response.artists, limit));
+			
+			// prefetch the next round if requested
 			if (prefetch === true) {
 				batchPreFetch(artists);
 			}
 
+			// return a promise
+			var def = new $.Deferred();
+			def.resolveWith(artists);
 			return def.promise();
 		});	
-
-		return deferred;
 	}
 
 	var hashFunction = function(artist) {
