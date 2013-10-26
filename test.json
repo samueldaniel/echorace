@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"name":"Vampire.Weekend","group":1},
+		{"name":"Katy.Perry","group":2},
+		{"name":"Tswift","group":2},
+		{"name":"JTimb","group":2}
+	],
+	"links":[
+		{"source":1,"target":0,"value":1},
+		{"source":2,"target":0,"value":2},
+		{"source":3,"target":0,"value":5}
+	]
+}
