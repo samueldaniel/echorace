@@ -51,22 +51,6 @@ var Artist = (function () {
 		};
 	}
 
-	// Options has a success continuation
-
-	// var getSimilar = function (artist, options) {
-	// 	url = "http://developer.echonest.com/api/v4/artist/similar"
-	// 	data = {
-	// 		api_key: "MHSE3YIQAWLBHWFSO",
-	// 		id: artist.id,
-	// 		format: 'json'
-	// 	}
-	// 	console.log("Launching ajax...");
-	// 	$.get(url, data).done(function (resp) {
-	// 		console.log("Ajax done!");
-	// 		options.success(resp.response.artists);
-	// 	});
-	// }
-
 	// Given the initial center, returns a graph
 	var getInitial = function (to, options) {
 		console.log(to);
@@ -98,7 +82,6 @@ var Artist = (function () {
 			nodes.group = 0;
 		}
 		return nodes;
-
 	}
 
 	// Export the functions we want public
